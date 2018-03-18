@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../sidemenubar/sidemenu-bar.html">
+<link rel="import" href="../header-element/header-app.html">
+<link rel="import" href="../mainroute/mainroute.html">
+
+<dom-module id="PolyTechTonic-app">
+  <template>
+    <style>
+      :host {
+        margin:0px;
+      }
+      header-app{
+        position: fixed;
+      }
+      main-route{
+        margin-top:100px;
+        position: relative;
+      }
+    </style>
+    <header-app></header-app>
+    <main-route></main-route>
+<!--    <side-menu-bar></side-menu-bar>-->
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PolyTechTonicApp extends Polymer.Element {
+      static get is() { return 'polytechtonic-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'PolyTechTonic-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolyTechTonicApp.is, PolyTechTonicApp);
+  </script>
+</dom-module>

@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="about-us">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+
+    <iron-meta id='meta'></iron-meta>
+    <h3>About Us page</h3>
+    <h2>I have captured <span style="color:rgb(230, 199, 23); font:bold;">: {{sharedEmployeeData}}</span> from an event!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class aboutus extends Polymer.Element {
+      static get is() { return 'about-us'; }
+      static get properties() {
+        return {
+          sharedEmployeeData: {
+            type: String
+          }
+        };
+      }
+      static get ready(){
+        super.ready();
+        //this.addEventListener('value-changed', function(e){console.log("Inside about us event captured");});
+      }
+      connectedCallback(){
+        super.connectedCallback();
+        window.addEventListener('customer-data', function(e){
+                                                        this.sharedEmployeeData = e.detail.cusdata.data;
+                                                        console.log(this.checkName,'Customer Value:- ', e);
+                                                      }.bind(this));
+      }
+      disconnectedCallback(){
+        super.disconnectedCallback();
+        window.removeEventListener('customer-data');
+      }
+    }
+    window.customElements.define(aboutus.is, aboutus);
+  </script>
+</dom-module>

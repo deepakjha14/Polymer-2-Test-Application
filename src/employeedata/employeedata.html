@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="emlpoyee-data">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+    <h3>Employee Entry Page {{category}}</h3>
+    <iron-form id="form1">
+        <form action="/foo" method="get">
+          <paper-input type="text" name="name" required label="Name"></paper-input>
+          <paper-input type="text" name="surname" required label="Surname"></paper-input>
+          
+          <br><br>
+          <paper-button raised onclick="form1.submit()">Submit</paper-button>
+        </form>
+        <br>
+        <div class="output"></div>
+      </iron-form>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class emlpoyeedata extends Polymer.Element {
+      static get is() { return 'emlpoyee-data'; }
+      static get properties() {
+        return {
+          EmployeeData: {
+            type: String,
+            value: 'emlpoyee-data'
+          }
+        };
+      }
+    }
+    window.customElements.define(emlpoyeedata.is, emlpoyeedata);
+  </script>
+</dom-module>

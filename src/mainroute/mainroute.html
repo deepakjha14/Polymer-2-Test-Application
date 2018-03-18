@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<!-- Iron imports -->
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
+
+<!--Custom pages listings-->
+<link rel="import" href="../aboutus/aboutus.html">
+<link rel="import" href="../employeedata/employeedata.html">
+<link rel="import" href="../displaydata/empdisplaydata.html">
+<link rel="import" href="../datashare-host/datashare-host.html">
+
+<dom-module id="main-route">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+      .sidenav {
+        height: 100%;
+        width: 150px;
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        background-color:#ffffff;
+        transition: 0.5s;
+        padding-top: 60px;
+        box-shadow: 0 1px 5px #d2d2d2;
+    }
+    iron-pages{
+      position: absolute;
+      left: 150px;
+    }
+    
+    </style>
+    <app-location route="{{route}}" use-hash-as-route></app-location>
+    
+    <iron-meta key="my_name" value="{{prop1}}"></iron-meta>
+
+    <app-route route="{{route}}"
+               pattern="/:id"
+               data="{{routeData}}"
+               tail="{{routeTail}}"
+               active="{{aboutActive}}"></app-route>
+    <iron-selector role="listbox" class="sidenav" selected="{{routeData.id}}"
+                   attr-for-selected="data-page">
+        <paper-item data-page="aboutus" href="/aboutus/list" >About us</paper-item>
+        <paper-item data-page="employeedata" href="/employeedata/list">Employee entry</paper-item>
+        <paper-item data-page="displaydata" href="/displaydata/section" >Data display</paper-item>
+        <paper-item data-page="databinding" href="/databinding/list" >Data share</paper-item>
+    </iron-selector>
+
+    <iron-pages selected="{{routeData.id}}" attr-for-selected="data-page">
+        <about-us data-page="aboutus" route="{{routeTail}}"></about-us>
+        <emlpoyee-data data-page="employeedata" route="{{routeTail}}"></emlpoyee-data>
+        <employee-display-data data-page="displaydata" route="{{routeTail}}"></employee-display-data>
+        <datashare-host data-page="databinding" route="{{routeTail}}"></datashare-host>
+    </iron-pages>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class mainroute extends Polymer.Element {
+      static get is() { return 'main-route'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'main-route'
+          }
+        };
+      }
+      /*static get attached(){
+        if(!this.route.path){
+          this.set('route.path','/art/list');
+        }
+      }*/
+    }
+    window.customElements.define(mainroute.is, mainroute);
+  </script>
+</dom-module>

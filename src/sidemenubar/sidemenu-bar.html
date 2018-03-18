@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="side-menu-bar">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+      .sidenav {
+        height: 100%;
+        width: 100px;
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        background-color:whitesmoke;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+    </style>
+  <div id="mySidenav" class="sidenav">
+    <a href="#">About us</a>
+    <a href="#">Employee Entry Form</a>
+    <a href="#">Data Display</a>
+    <a href="#">Contact</a>
+  </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class sidemenubar extends Polymer.Element {
+      static get is() { return 'side-menu-bar'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'side-menu-bar'
+          }
+        };
+      }
+    }
+    window.customElements.define(sidemenubar.is, sidemenubar);
+  </script>
+</dom-module>

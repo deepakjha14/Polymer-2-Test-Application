@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../datashare-target/datashare-target.html">
+
+
+<dom-module id="datashare-host">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+
+    <h3>Datashare Host(Parent)</h3>
+    <aside>Change <mark>notify</mark> and <mark>readonly</mark> property to check about one-way two-way bindings.</aside>
+    Data Change event when Polymer elements are used
+    <paper-input value="{{hostData}}"></paper-input><br><br>
+    <!--
+    Data Change event when default elements are used
+    <input value="{{hostData}}" id="ipVal" on-input="compute">
+    <br>-->
+    {{hostData}}
+    <datashare-target shared-data="{{hostData}}"></datashare-target>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class datasharehost extends Polymer.Element {
+      static get is() { return 'datashare-host'; }
+      static get properties() {
+        return {
+          hostData: {
+            type: String,
+            notify: true,
+            observer: 'changePropertyValue'
+          }
+        };
+      }
+      changePropertyValue(newVal, changedVal){
+        console.log('New Value : - ',newVal, ', Old Value: - ',changedVal);
+
+      }
+      compute(){
+        this.hostData = this.$.ipVal.value;
+        console.log(this.hostData);
+      }
+    }
+    window.customElements.define(datasharehost.is, datasharehost);
+  </script>
+</dom-module>

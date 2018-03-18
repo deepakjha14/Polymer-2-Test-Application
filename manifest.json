@@ -1,0 +1,7 @@
+{
+  "name": "PolyTechTonic",
+  "short_name": "PolyTechTonic",
+  "description": "Polymer tech tonic prep",
+  "start_url": "/",
+  "display": "standalone"
+}

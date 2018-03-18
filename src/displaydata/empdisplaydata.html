@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="employee-display-data">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+    <iron-meta id='meta'></iron-meta>
+    Shared data is {{IronDataShare}}
+    <iron-meta key="empAPIData" value="{{EmployeeData}}" on-value-changed="displayMessage()"></iron-meta>
+    <h3>Display Data Page</h3>
+    <!--<iron-ajax
+      auto
+      url="http://localhost:8000/notes"
+      handle-as="json"
+      last-response="{{EmployeeData}}"></iron-ajax>-->
+
+      <iron-ajax
+      auto
+      url="http://localhost:8000/notes"
+      handle-as="json"
+      on-response="handleResponse"></iron-ajax>
+
+      Data from server is<br><br>
+      <template is="dom-repeat" items="{{EmployeeData.records}}">
+        <div style="border:1px solid">
+          Name {{item.name}} age {{item.age}}<br>
+          Works in {{item.department}} department!!!
+        </div><br>
+      </template>
+  </template>
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class employeedisplaydata extends Polymer.Element {
+      static get is() { return 'employee-display-data'; }
+      static get properties() {
+        return {
+          EmployeeData: {
+            type: String
+          },
+          IronDataShare : {
+            type: String
+          }
+        };
+      }
+      static get ready(){
+        this.IronDataShare = this.$.meta.byKey('my_name');
+      }
+      handleResponse(evt, request){    
+        this.IronDataShare = this.$.meta.byKey('my_name');
+        this.EmployeeData = request.response;
+        this.dispatchEvent(
+          new CustomEvent('customer-data', 
+                          { bubbles: true, 
+                            composed: true, 
+                            detail : {
+                              name:"Deepak", 
+                              surname:"Jha",
+                              place:"display data",
+                              cusdata: this.EmployeeData
+                            }
+                          }));
+        console.log(this.EmployeeData," Incoming response and meta data is ", this.$.meta.byKey('empAPIData'));
+      } 
+      connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('value-changed', function(e){console.log("Value changed fired !", e)});
+      }
+      displayMessage(evt, request){        
+        console.log("This is the display message API");  
+      }     
+    }
+
+    window.customElements.define(employeedisplaydata.is, employeedisplaydata);
+  </script>
+</dom-module>

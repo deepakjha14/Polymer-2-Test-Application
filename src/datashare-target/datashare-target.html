@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="datashare-target">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+    <h3>Datashare Target Element(child) </h3>
+    <paper-input value="{{sharedData}}"></paper-input>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class datasharetarget extends Polymer.Element {
+      static get is() { return 'datashare-target'; }
+      static get properties() {
+        return {
+          targetData: {
+            type: String,
+            notify:true
+          },
+          sharedData:{
+            type: String,
+            notify: true,
+            readOnly: false
+          }
+        };
+      }
+    }
+    window.customElements.define(datasharetarget.is, datasharetarget);
+  </script>
+</dom-module>
