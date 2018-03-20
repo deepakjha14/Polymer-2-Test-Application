@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../reduxapp-mixin/reduxapp-mixin.html">
+
+<dom-module id="redux-store-local">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+<div> Message from redux is : <i style="color:orange; font:bolder;">[[message]]</i></div>
+<br><br><br>
+Name : <paper-input value="{{complexProp.myName}}"></paper-input>
+Surname : <paper-input value="{{complexProp.surName}}"></paper-input>
+Age : <paper-input value="{{complexProp.age}}"></paper-input>
+{{complexProp.myName}}
+</template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class reduxstorelocal extends ReduxMixin(Polymer.Element){
+      static get is() { return 'redux-store-local'; }
+      static get properties() {
+        return {
+          message:{
+            type: String,
+            statePath: 'message'
+          },
+          complexProp:{
+            type: Object,
+            value: ()=> {return {myName:"Deepak", surNam:"Jha", age:"32"};}
+          }
+        }
+      }
+      static get observers() {
+        return [
+        // Observer method name, followed by a list of dependencies, in parenthesis
+        'userListChanged(complexProp.*)'
+        ]
+      }
+      userListChanged(myVal){
+        console.log(myVal, " Receiving this ");
+      }
+    }
+    window.customElements.define(reduxstorelocal.is, reduxstorelocal);
+  </script>
+</dom-module>

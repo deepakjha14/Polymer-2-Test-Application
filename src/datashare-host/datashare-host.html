@@ -23,6 +23,14 @@
     <br>-->
     {{hostData}}
     <datashare-target shared-data="{{hostData}}"></datashare-target>
+
+    <h3>Changing Object Values</h3><br><br>
+    Note: On Change Object Value changes the Object property silently. Polymer chnage detection will fails as it is not monitoring the object's individual property.<br>
+    This is a perfect candidate for firing the <i>notifyPath()</i> method.
+    <paper-input value="{{hostDataObj.a}}"></paper-input><br><br>
+    {{hostDataObj.a}}
+    <datashare-target shared-data-obj="{{hostDataObj.a}}"></datashare-target><br><br>
+    <button on-click="changeObjValue">Change Object Value</button>
   </template>
 
   <script>
@@ -38,6 +46,11 @@
             type: String,
             notify: true,
             observer: 'changePropertyValue'
+          },
+          hostDataObj:{
+            type: Object,
+            value: ()=>{return {a:'Original Property', b:'something', c:'10'}},
+            notify: true
           }
         };
       }
@@ -48,6 +61,11 @@
       compute(){
         this.hostData = this.$.ipVal.value;
         console.log(this.hostData);
+      }
+      changeObjValue(){
+        this.hostDataObj.a += ' NotifyPath Called';
+        console.log(' Changed Value ', this.hostDataObj.a );
+        this.notifyPath('hostDataObj.a');
       }
     }
     window.customElements.define(datasharehost.is, datasharehost);
