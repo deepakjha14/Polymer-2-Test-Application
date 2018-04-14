@@ -10,7 +10,7 @@
     </style>
 
     <iron-meta id='meta'></iron-meta>
-    <h3>About Us page</h3>
+    <h3>Data Received through Event</h3>
     <h2>I have captured <span style="color:rgb(230, 199, 23); font:bold;">: {{sharedEmployeeData}}</span> from an event!</h2>
   </template>
 
@@ -24,7 +24,8 @@
       static get properties() {
         return {
           sharedEmployeeData: {
-            type: String
+            type: String,
+            value: "This is test Value"
           }
         };
       }

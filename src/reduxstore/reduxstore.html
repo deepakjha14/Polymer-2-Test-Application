@@ -11,12 +11,12 @@
         color:black;
       }
     </style>
-<div> Message from redux is : <i style="color:orange; font:bolder;">[[message]]</i></div>
+<div> Redux-Store Message : <i style="color:orange; font:bolder;">[[message]]</i></div>
 <br><br><br>
-Name : <paper-input value="{{complexProp.myName}}"></paper-input>
-Surname : <paper-input value="{{complexProp.surName}}"></paper-input>
-Age : <paper-input value="{{complexProp.age}}"></paper-input>
-{{complexProp.myName}}
+
+Message : <paper-input value="{{message}}"></paper-input>
+
+</div>
 </template>
 
   <script>
@@ -31,21 +31,17 @@ Age : <paper-input value="{{complexProp.age}}"></paper-input>
           message:{
             type: String,
             statePath: 'message'
-          },
-          complexProp:{
-            type: Object,
-            value: ()=> {return {myName:"Deepak", surNam:"Jha", age:"32"};}
           }
         }
       }
       static get observers() {
         return [
         // Observer method name, followed by a list of dependencies, in parenthesis
-        'userListChanged(complexProp.*)'
+        'userListChanged(message)'
         ]
       }
-      userListChanged(myVal){
-        console.log(myVal, " Receiving this ");
+      userListChanged(changedMessage){
+        console.log(changedMessage, " Message changed property");
       }
     }
     window.customElements.define(reduxstorelocal.is, reduxstorelocal);

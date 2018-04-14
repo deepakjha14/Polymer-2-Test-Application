@@ -20,7 +20,7 @@
           <paper-input type="text" name="surname" required label="Surname"></paper-input>
           
           <br><br>
-          <paper-button raised onclick="form1.submit()">Submit</paper-button>
+          <paper-button raised on-click="showAlert">Submit</paper-button>
         </form>
         <br>
         <div class="output"></div>
@@ -42,7 +42,11 @@
           }
         };
       }
+      showAlert(){
+      alert('Alert from paper button');
     }
+    }
+     
     window.customElements.define(emlpoyeedata.is, emlpoyeedata);
   </script>
 </dom-module>

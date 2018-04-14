@@ -18,9 +18,9 @@
         background-color:#5f5abcde;
         opacity: 2; 
         width:100%; 
-        margin: 0px;  
+        margin: 0px;
         top: 0;
-        left: 0; 
+        left: 0;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
       }
       button{
@@ -31,11 +31,11 @@
         color:white;
       }
     </style>
-    <app-header condenses>
+    <app-header >
         
       <app-toolbar>
           <paper-icon-button icon="menu" on-click="clickMethod"></paper-icon-button>
-          <div main-title>Polymer 2 Application</div>
+          <div main-title>Polymer 2 Sample</div>
           <paper-icon-button icon="user">MM</paper-icon-button>
           <button id="lgtBtn">Logout</button>
       </app-toolbar>
@@ -82,7 +82,7 @@
       clickMethod(e){
         // Codes to handle click should reside here
         console.log('Testing the web component');
-        debugger;
+        //debugger;
         this.dispatchEvent(
           new CustomEvent('custom-menu-click', 
                           { bubbles: true, 

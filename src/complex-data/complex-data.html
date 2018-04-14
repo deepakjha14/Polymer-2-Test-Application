@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="complex-data">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color:black;
+      }
+    </style>
+    Complex Data Sample:
+    
+    Name : <paper-input value="{{complexProp.myName}}"></paper-input>
+    Surname : <paper-input value="{{complexProp.surName}}"></paper-input>
+    Age : <paper-input value="{{complexProp.age}}"></paper-input>
+    <br><br>
+    <h3>Changed value(Object Observer):</h3><br>
+    <div style="color:crimson">
+      {{complexProp.myName}} <br>
+      {{complexProp.surName}} <br>
+      {{complexProp.age}} <br>
+    </div>
+</template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class complexdata extends Polymer.Element{
+      static get is() { return 'complex-data'; }
+      static get properties() {
+        return {
+          complexProp:{
+            type: Object,
+            value: ()=> {return {myName:"Firstname", surName:"Secondname", age:"21"};}
+          }
+        }
+      }
+      static get observers() {
+        return [
+        // Observer method name, followed by a list of dependencies, in parenthesis
+        'userListChanged(complexProp.*)'
+        ]
+      }
+      userListChanged(complexValues){
+        console.log(complexValues, " Receiving this chnaged property");
+      }
+    }
+    window.customElements.define(complexdata.is, complexdata);
+  </script>
+</dom-module>

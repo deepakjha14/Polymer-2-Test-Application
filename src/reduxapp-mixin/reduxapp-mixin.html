@@ -15,10 +15,11 @@
 
   <script>
   // Setup a Redux store
-  const initial = {message: 'Redux is awesome.'};
+  const initial = {message: 'Redux is awesome, initial message from redux'};
   const reducer = function (state, action) {
+    console.log("State ", state, " Action ", action);
     switch (action.type) {
-      case 'UPDATE_MESSAGE': return {message: action.message};
+      case 'UPDATE_MESSAGE':return {message: action.message};
       default: return state;
     }
   };
